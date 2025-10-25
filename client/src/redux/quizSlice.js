@@ -1,13 +1,13 @@
 // src/redux/quizSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import axiosInstance from "../apicalls/axiosInstance";
 export const fetchQuiz = createAsyncThunk(
   "quiz/fetchQuiz",
   async ({ topic, token, difficulty = "intermediate", numQuestions = 5 }, thunkAPI) => {
     try {
       console.log('Fetching quiz with:', { topic, difficulty, numQuestions });
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         "/api/quiz",
         { topic, difficulty, numQuestions },
         { headers: { Authorization: `Bearer ${token}` } }

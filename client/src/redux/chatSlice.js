@@ -1,12 +1,13 @@
 // src/redux/chatSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import axiosInstance from "../apicalls/axiosInstance";
 
 export const sendMessage = createAsyncThunk(
   "chat/sendMessage",
   async ({ query, token }, thunkAPI) => {
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         "/api/chat",
         { query },
         { headers: { Authorization: `Bearer ${token}` } }
@@ -22,10 +23,10 @@ export const sendMessage = createAsyncThunk(
 
 // Load chat history on mount
 export const loadChatHistory = createAsyncThunk(
-  "chat/loadHistory",
+  "/apichat/loadHistory",
   async ({ token }, thunkAPI) => {
     try {
-      const res = await axios.get("/api/chat/history", {
+      const res = await axiosInstance.get("/chat/history", {
         headers: { Authorization: `Bearer ${token}` }
       });
       return res.data.messages || [];

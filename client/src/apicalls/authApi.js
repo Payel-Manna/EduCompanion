@@ -1,12 +1,8 @@
-// src/apicalls/authApi.js
-import axios from "axios";
-
-axios.defaults.baseURL = "http://localhost:8000"; // Backend URL
-axios.defaults.withCredentials = true; // Allow cookies
+import axiosInstance from "./axiosInstance";
 
 export const signup = async (formData) => {
   try {
-    const res = await axios.post("/api/auth/signup", formData);
+    const res = await axiosInstance.post("/api/auth/signup", formData);
     return res.data;
   } catch (err) {
     throw err.response?.data || { message: "Signup failed" };
@@ -15,7 +11,7 @@ export const signup = async (formData) => {
 
 export const login = async (formData) => {
   try {
-    const res = await axios.post("/api/auth/login", formData);
+    const res = await axiosInstance.post("/api/auth/login", formData);
     return res.data;
   } catch (err) {
     throw err.response?.data || { message: "Login failed" };
@@ -24,7 +20,7 @@ export const login = async (formData) => {
 
 export const logout = async () => {
   try {
-    const res = await axios.post("/api/auth/signout");
+    const res = await axiosInstance.post("/api/auth/signout");
     return res.data;
   } catch (err) {
     throw err.response?.data || { message: "Logout failed" };

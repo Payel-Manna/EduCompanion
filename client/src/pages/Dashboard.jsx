@@ -13,6 +13,7 @@ import FeedbackForm from "../components/FeedbackForm";
 import Leaderboard from "../components/Leaderboard";
 import UserProgress from "../components/UserProgress";
 import DarkModeToggle from "../components/DarkModeToggle";
+import axiosInstance from "../apicalls/axiosInstance";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export default function Dashboard() {
 
     console.log("Fetching materials with token:", token ? "present" : "missing");
 
-    axios
+    axiosInstance
       .get("/api/material", { 
         headers: { Authorization: `Bearer ${token}` } 
       })
